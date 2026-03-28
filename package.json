@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@langchain/core": "^1.1.36",
     "@langchain/google-genai": "^2.1.25",
     "@langchain/mistralai": "^1.0.7",
     "@langchain/openai": "^1.2.13",
