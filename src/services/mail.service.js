@@ -1,35 +1,29 @@
-import nodemailer from "nodemailer";
+import SibApiV3Sdk from "sib-api-v3-sdk";
 
-import dotenv from "dotenv"
-dotenv.config()
+const client = SibApiV3Sdk.ApiClient.instance;
+const apiKey = client.authentications["api-key"];
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    type: 'OAuth2',
-    user: process.env.GOOGLE_USER,
-    clientId: process.env.GOOGle_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
-  },
-})
+apiKey.apiKey = process.env.BREVO_API_KEY;
 
-transporter.verify((error, success) => {
-  if (error) {
-    console.error('Error connecting to email server:', error);
-  } else {
-    console.log('Email server is ready to send messages');
+const tranEmailApi = new SibApiV3Sdk.TransactionalEmailsApi();
+
+export async function sendMail({ to, subject, html }) {
+  try {
+    const response = await tranEmailApi.sendTransacEmail({
+      sender: {
+        email: process.env.BREVO_SENDER,
+        name: "Flash AI",
+      },
+      to: [{ email: to }],
+      subject: subject,
+      htmlContent: html,
+    });
+
+    console.log("Email sent:", response.messageId);
+    return response;
+
+  } catch (error) {
+    console.error("Failed to send email:", error);
+    throw error;
   }
-})
-
-export async function sendMail({to,subject,html}) {
-    const mailOptions ={
-        from:process.env.GOOGLE_USER,
-        to,
-        subject,
-        html
-    }
-
-    const details = await transporter.sendMail(mailOptions);
-    console.log("email sent :"+ details);
 }
