@@ -42,7 +42,7 @@ async function registerController(req,res) {
         subject:"welcome to Flash",
         html:`            <h1>Welcome to Flash, ${username}!</h1>
             <p>Thank you for registering with us. We're excited to have you on board!</p>
-            <a href="http://localhost:3000/api/auth/verify-email?token=${token}">Click here to verify your email</a>
+            <a href="https://flash-zzqe.onrender.com/api/auth/verify-email?token=${token}">Click here to verify your email</a>
             <p>Feel free to explore our platform and let us know if you have any questions.</p>
             <p>Best regards,<br/>The Flash Team</p>
         `
@@ -95,7 +95,7 @@ async function loginController(req, res) {
       html: `
         <h1>Hey ${user.username}, verify your email</h1>
         <p>You tried to log in but your email isn't verified yet.</p>
-        <a href="http://localhost:3000/api/auth/verify-email?token=${verifyToken}">
+        <a href="https://flash-zzqe.onrender.com/api/auth/verify-email?token=${verifyToken}">
           Click here to verify your email
         </a>
       `
@@ -165,7 +165,7 @@ async function emailResendController(req,res) {
         subject:"welcome to Flash",    
         html:`            <h1>Welcome to Flash, ${user.username}!</h1>
         <p>Thank you for registering with us. We're excited to have you on board!</p>
-        <a href="http://localhost:3000/api/auth/verify-email?token=${token}">Click here to verify your email</a>
+        <a href="https://flash-zzqe.onrender.com/api/auth/verify-email?token=${token}">Click here to verify your email</a>
         <p>Feel free to explore our platform and let us know if you have any questions.</p>
         <p>Best regards,<br/>The Flash Team</p>
     `
